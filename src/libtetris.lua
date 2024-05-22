@@ -1,7 +1,13 @@
 local ffi = require("ffi")
 
 local M = {}
-M.api = ffi.load("./lib/tetris")
+
+local os  = love.system.getOS()
+if os == "OS X" then
+    M.api = ffi.load("./lib/libtetris.dylib")
+else
+    M.api = ffi.load("./lib/tetris")
+end
 
 ffi.cdef[[
 typedef int time_us_t;
