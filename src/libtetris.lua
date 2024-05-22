@@ -5,8 +5,10 @@ local M = {}
 local os  = love.system.getOS()
 if os == "OS X" then
     M.api = ffi.load("./lib/libtetris.dylib")
+elseif os == "Windows" then
+    M.api = ffi.load("./lib/tetris.dll")
 else
-    M.api = ffi.load("./lib/tetris")
+    M.api = ffi.load("./lib/libtetris.so")
 end
 
 ffi.cdef[[
